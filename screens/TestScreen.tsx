@@ -1,21 +1,28 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, Pressable } from "react-native";
+import styles from "../styles/Styles";
 
 const TestScreen = ({ route, navigation }: { navigation: any; route: any }) => {
-  const name = route?.params?.name ?? 'DefaultName';
+  const name = route?.params?.name ?? "DefaultName";
   const [isVisible, setIsVisible] = React.useState(false);
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Hi {name}</Text>
-      <Button title="Go To Home" onPress={() => navigation.navigate("Home")} />
-      <Button
-        title="Toggle StatusBar"
-        onPress={() => {
-          setIsVisible(!isVisible);
-        }}
-      />
+    <View style={styles.container}>
+      <View style={[styles.box, styles.lightBlue]}>
+        <Text>Date Range Caluculator</Text>
+        <Text>Hi, {name}</Text>
+      </View>
+      <Pressable
+        onPress={() => navigation.navigate("Home")}
+        style={styles.button}
+      >
+        <Text>Navigate to home</Text>
+      </Pressable>
+      <Pressable onPress={() => setIsVisible(!isVisible)} style={styles.button}>
+        <Text>Toggle Status Bar</Text>
+      </Pressable>
+
       <StatusBar hidden={isVisible} />
     </View>
   );
